@@ -11,11 +11,13 @@ import com.atguigu.gmall.pms.service.ProductAttrValueService;
 import com.atguigu.gmall.pms.service.SkuImagesService;
 import com.atguigu.gmall.pms.service.SkuSaleAttrValueService;
 import com.atguigu.gmall.sms.vo.SaleVO;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -62,6 +64,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
         return new PageVo(this.page(page,wrapper));
     }
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;// 有两种可以选择 AmqpTemplate(高级)  和 RabbitTemplate
 
     @Autowired
     private SpuInfoDescDao spuInfoDescDao;
@@ -187,6 +192,16 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         this.gmallSmsClient.saveSale(saleVO);
         });
 
+        sendMessage(spuId,"insert");//发送消息到rabbitmq的方法
+
+    }
+
+    private void sendMessage(Long spuId,String type) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id",spuId);
+        map.put("type",type);
+        //三个参数，第一个是交换机的名字，第二个是路由key，第三个是你要发送的内容
+        this.amqpTemplate.convertAndSend("GMALL-ITEM-EXCHANGE","item." + type,map);
     }
 
 }
