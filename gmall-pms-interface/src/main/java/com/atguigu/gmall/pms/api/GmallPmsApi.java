@@ -7,14 +7,15 @@ import com.atguigu.gmall.pms.entity.CategoryEntity;
 import com.atguigu.gmall.pms.entity.SkuInfoEntity;
 import com.atguigu.gmall.pms.entity.SpuInfoEntity;
 import com.atguigu.gmall.pms.vo.SpuAttributeValueVO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 public interface GmallPmsApi {
+
+    @GetMapping("pms/category")
+    public Resp<List<CategoryEntity>> queryCategory(@RequestParam(value="level", defaultValue = "0")Integer level
+            , @RequestParam(value="parentCid", required = false)Long parentCid);
 
     @PostMapping("pms/spuinfo/list")
     public Resp<List<SpuInfoEntity>> querySpuPage(@RequestBody QueryCondition queryCondition);

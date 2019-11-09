@@ -33,3 +33,9 @@ spring:
             - Path=/api/search/**
           filters:
             - RewritePath=/api/(?<segment>.*), /$\{segment} # 重写前缀，去掉/api
+        - id: index-route
+          uri: lb://index-service
+          predicates:
+            - Path=/api/index/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment} # 重写前缀，去掉/api
