@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Data;
 
@@ -67,5 +68,9 @@ public class CategoryEntity implements Serializable {
 	 */
 	@ApiModelProperty(name = "productCount",value = "商品数量")
 	private Integer productCount;
+
+	//因为需要查询二级和三级菜单，而一个list集合不能满足需求，所以我们在CategoryEntiry的基础上封装一个字段subs
+	private List<CategoryEntity> subs;
+
 
 }
