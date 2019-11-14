@@ -1,4 +1,4 @@
-package com.atguigu.gmallitem;
+package com.atguigu.gmall.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-public class GmallItemApplication {
+public class GmallAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GmallItemApplication.class, args);
+        SpringApplication.run(GmallAuthApplication.class, args);
     }
 
 }

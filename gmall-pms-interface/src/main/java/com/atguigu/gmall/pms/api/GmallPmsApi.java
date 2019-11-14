@@ -2,11 +2,9 @@ package com.atguigu.gmall.pms.api;
 
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
-import com.atguigu.gmall.pms.entity.BrandEntity;
-import com.atguigu.gmall.pms.entity.CategoryEntity;
-import com.atguigu.gmall.pms.entity.SkuInfoEntity;
-import com.atguigu.gmall.pms.entity.SpuInfoEntity;
+import com.atguigu.gmall.pms.entity.*;
 import com.atguigu.gmall.pms.vo.SpuAttributeValueVO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,4 +36,18 @@ public interface GmallPmsApi {
     @GetMapping("pms/productattrvalue/{spuId}")
     public Resp<List<SpuAttributeValueVO>> querySearchAttrValue(@PathVariable("spuId") Long spuId);
 
+
+//    =========================  商品详情页需要的接口
+
+    //根据skuId查询skuInfoEntity的方法
+    @GetMapping("pms/skuinfo/info/{skuId}")
+    public Resp<SkuInfoEntity> info(@PathVariable("skuId") Long skuId);
+
+    //根据skuId查询sku图片的方法
+    @GetMapping("pms/skuimages/{skuId}")
+    public Resp<List<String>> querySkuImagesBySkuId(@PathVariable("skuId")Long skuId);
+
+    //根据spuId查询所有的销售属性
+    @GetMapping("pms/skusaleattrvalue/{spuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySaleAttrBySpuId(@PathVariable("spuId")Long spuId);
 }

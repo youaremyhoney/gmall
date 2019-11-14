@@ -1,0 +1,14 @@
+server:
+  port: 8089
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+gmall:
+  jwt:
+    pubKeyPath: D:\\tmp\\rsa\\rsa.pub
+    priKeyPath: D:\\tmp\\rsa\\rsa.pri
+    secret: jdalkghdlk
+    expire: 30 #设置过期时间为分钟
+    cookieName: GMALL_TOKEN

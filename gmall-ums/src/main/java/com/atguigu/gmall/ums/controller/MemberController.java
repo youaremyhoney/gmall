@@ -33,6 +33,44 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    //发送短信的方法
+    @GetMapping("sendMsg/{mobile}")
+    public Resp<String> sendMsg(@PathVariable("mobile")String mobile){
+
+        String s = this.memberService.sendMsg(mobile);
+
+        return Resp.ok(s);
+    }
+
+    //查询用户名和密码
+    @GetMapping("query")
+    public Resp<MemberEntity> queryUser(@RequestParam("username")String username, @RequestParam("password")String password){
+
+        MemberEntity memberEntity = this.memberService.queryUser(username,password);
+
+        return Resp.ok(memberEntity);
+    }
+
+    @PostMapping("register")
+    public Resp<Object> register(MemberEntity memberEntity,String code){
+        this.memberService.register(memberEntity,code);
+        return Resp.ok("注册成功");
+    }
+
+    /**
+     * 校验数据是否可用的方法
+     * @param data 数据
+     * @param type  数据的类型
+     * @return
+     */
+    @GetMapping("check/{data}/{type}")
+    public Resp<Boolean> checkData(@PathVariable("data")String data,@PathVariable("type")Integer type){
+
+        Boolean b = this.memberService.checkData(data,type);
+
+        return Resp.ok(b);
+    }
+
     /**
      * 列表
      */

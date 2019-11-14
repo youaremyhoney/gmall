@@ -1,5 +1,7 @@
 package com.atguigu.gmall.pms.service.impl;
 
+import com.atguigu.gmall.pms.entity.SkuInfoEntity;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -11,6 +13,9 @@ import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.gmall.pms.dao.SkuImagesDao;
 import com.atguigu.gmall.pms.entity.SkuImagesEntity;
 import com.atguigu.gmall.pms.service.SkuImagesService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service("skuImagesService")
@@ -24,6 +29,17 @@ public class SkuImagesServiceImpl extends ServiceImpl<SkuImagesDao, SkuImagesEnt
         );
 
         return new PageVo(page);
+    }
+
+    @Override
+    public List<String> querySkuImagesBySkuId(Long skuId) {
+        QueryWrapper<SkuImagesEntity> wrapper = new QueryWrapper<>();
+        List<SkuImagesEntity> skuImagesEntities = this.list(wrapper.eq("sku_id", skuId));
+        List<String> images = skuImagesEntities.stream().map(image -> {
+            String imgUrl = image.getImgUrl();
+            return imgUrl;
+        }).collect(Collectors.toList());
+        return images;
     }
 
 }
