@@ -31,6 +31,13 @@ public class SkuSaleAttrValueController {
     @Autowired
     private SkuSaleAttrValueService skuSaleAttrValueService;
 
+    //根据skuId查询skuSaleAttrEntity集合的方法
+    @GetMapping("query/{skuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySkuSaleAttrBySkuId(@PathVariable("skuId") Long skuId){
+        List<SkuSaleAttrValueEntity> skuSaleAttrValueEntities = this.skuSaleAttrValueService.querySkuSaleAttrBySkuId(skuId);
+        return Resp.ok(skuSaleAttrValueEntities);
+    }
+
 
     //根据spuId查询销售属性的方法
     @GetMapping("{spuId}")

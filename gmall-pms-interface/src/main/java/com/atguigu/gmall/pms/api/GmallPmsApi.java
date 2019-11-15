@@ -50,4 +50,8 @@ public interface GmallPmsApi {
     //根据spuId查询所有的销售属性
     @GetMapping("pms/skusaleattrvalue/{spuId}")
     public Resp<List<SkuSaleAttrValueEntity>> querySaleAttrBySpuId(@PathVariable("spuId")Long spuId);
+
+    //  ===============================  购物车需要的接口
+    @GetMapping("pms/skusaleattrvalue/query/{skuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySkuSaleAttrBySkuId(@PathVariable("skuId")Long skuId);
 }

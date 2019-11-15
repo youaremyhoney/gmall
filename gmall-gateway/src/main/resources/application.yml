@@ -55,3 +55,9 @@ spring:
             - Path=/api/auth/**
           filters:
             - RewritePath=/api/(?<segment>.*), /$\{segment} # 重写前缀，去掉/api
+        - id: cart-route #购物车
+          uri: lb://cart-service
+          predicates:
+            - Path=/api/cart/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment} # 重写前缀，去掉/api

@@ -1,11 +1,13 @@
 package com.atguigu.gmall.sms.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.sms.vo.ItemSaleVO;
 import com.atguigu.gmall.sms.vo.SaleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +34,15 @@ import com.atguigu.gmall.sms.service.SkuBoundsService;
 public class SkuBoundsController {
     @Autowired
     private SkuBoundsService skuBoundsService;
+
+    @GetMapping("item/sales/{skuId}")
+    public Resp<List<ItemSaleVO>> queryItemSaleVOS(@PathVariable("skuId")Long skuId){
+
+        //查询所有优惠信息的方法
+        List<ItemSaleVO> itemSaleVOS = this.skuBoundsService.queryItemSaleVOS(skuId);
+
+        return Resp.ok(itemSaleVOS);
+    }
 
     /**
      * 因为需要接受的参数是一个对象，比较复杂，所以我们使用json传递参数

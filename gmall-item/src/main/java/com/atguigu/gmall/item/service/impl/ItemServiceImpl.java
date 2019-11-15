@@ -8,18 +8,14 @@ import com.atguigu.gmall.item.service.ItemService;
 import com.atguigu.gmall.item.vo.ItemVO;
 import com.atguigu.gmall.pms.entity.SkuInfoEntity;
 import com.atguigu.gmall.pms.entity.SkuSaleAttrValueEntity;
-import com.atguigu.gmall.sms.feign.GmallSmsApi;
-import com.sun.xml.internal.ws.util.CompletedFuture;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import rx.Completable;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class ItemServiceImpl implements ItemService {

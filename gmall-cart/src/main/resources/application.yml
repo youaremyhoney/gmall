@@ -1,0 +1,15 @@
+server:
+  port: 8090
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  redis:
+    host: 192.168.16.128
+gmall:
+  jwt:
+    pubKeyPath: D:\\tmp\\rsa\\rsa.pub #公钥的路径
+    cookieName: GMALL_TOKEN #cookie的名称
+    expire: 43200 #设置过期时间为一个月，单位是秒
+    userKeyName: user_key #购物车未登录，游客唯一标识
